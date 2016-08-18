@@ -1,0 +1,32 @@
+{
+  "name": "dunjego",
+  "version": "1.0.0",
+  "description": "dungeon reviews for adventurers",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "iconv-lite": "^0.4.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d3ej/dunjego.git"
+  },
+  "keywords": [
+    "dungeon",
+    "adventure",
+    "swords",
+    "loot"
+  ],
+  "author": "d3ej",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d3ej/dunjego/issues"
+  },
+  "homepage": "https://github.com/d3ej/dunjego#readme"
+}
