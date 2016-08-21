@@ -1,31 +1,39 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+var express     = require('express'),
+	app  		= express(),
+	bodyParser  = require('body-parser'),
+	mongoose  	= require('mongoose');
 
+
+mongoose.connect("mongodb://127.0.0.1/dunjego");
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('assets'));
 app.use(express.static("/views/partials"));
 
-var dungeons =
-[
-	{name: "Fire Cavern", image: "firecavern.jpg"},
-	{name: "Ice Temple", image: "icetemple.jpg"},
-	{name: "Forest Maze", image: "forestmaze.jpg"},
-	{name: "The Pit", image: "thepit.jpg"},	
-	{name: "Fire Cavern", image: "firecavern.jpg"},
-	{name: "Ice Temple", image: "icetemple.jpg"},
-	{name: "Forest Maze", image: "forestmaze.jpg"},
-	{name: "The Pit", image: "thepit.jpg"},
-];
+var dungeonSchema = new mongoose.Schema({
+	name: String,
+	image: String,
+	levels: Number,
+	difficulty: String,
+	monsters: [String],
+	loot: [String]
+});
+
+var dungeon = mongoose.model("Dungeon", dungeonSchema);
 
 app.get("/", function(req, res){
 	res.redirect("dungeons");
 });
 
 app.get("/dungeons", function(req, res){
-	res.render("dungeons", {dungeons: dungeons});
+	dungeon.find({}, function(err, allDungeons){
+		if(err){
+			console.log(err);
+		} else{
+			res.render("dungeons", {dungeons: allDungeons});
+		}
+	});
 });
 
 app.get("/dungeons/new", function(req, res){
@@ -33,11 +41,22 @@ app.get("/dungeons/new", function(req, res){
 });
 
 app.post("/dungeons", function(req, res){
-	var name = req.body.name;
-	var image = req.body.image;
-	var newCampground = {name: name, image: image};
-	dungeons.push(newCampground);
-	res.redirect("/dungeons");
+	var name 		= req.body.name;
+		image 		= req.body.image;
+		levels 		= req.body.levels;
+		difficulty 	= req.body.difficult;
+		monsters 	= req.body.monsters;
+		loost 		= req.body.image;
+		newDungeon 	= {name: name, image: image};
+	//create new dungeon, save to DB
+	dungeon.create(newDungeon, function(err, newlyCreated){
+		if(err){
+			console.log(err)
+		} else{
+			//redirect to dungeons
+			res.redirect("/dungeons");
+		}
+	});
 });
 
 app.listen(3000, function(){
