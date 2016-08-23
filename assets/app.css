@@ -9,7 +9,7 @@
 }
 
 .thumbnail {
-	height: 209px;
+	max-height: 290px;
 	width: 263px;
 }
 

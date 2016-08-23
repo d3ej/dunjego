@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1><%= dungeon.name %></h1>
+			<img src="<%= dungeon.image %>">
+			<p><%= dungeon.description %></p>
+			<p># of floors: <%= dungeon.levels %></p>
+		</div>
+	</header>
+</div>
+
+<% include partials/footer %>
