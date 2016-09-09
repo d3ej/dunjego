@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1>Dunjego </h1>
+			<p>Monsters, bosses, traps, and loot reviewed and rated by fellow adventurers!</p>
+			<p>
+				<a href="/dungeons/new" class="btn btn-primary btn-large">Add a new dungeon!</a>
+			</p>
+		</div>
+	</header>
+
+	<div class="container">
+		<h1>Popular Dungeons!</h1>
+		<div class="row">
+			<% dungeons.forEach(function(dungeon){ %>
+				<div class="col-md-3 col-sm-6">
+					<div class="thumbnail">
+						<img src=<%= dungeon.image %>>
+						<div class="caption">
+							<h4><%= dungeon.name %></h4>
+						</div>
+						<p>
+							<a href="/dungeons/<%= dungeon._id %>" class="btn btn-primary">More Info</a>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

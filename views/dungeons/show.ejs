@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1><%= dungeon.name %></h1>
+			<img src="<%= dungeon.image %>">
+			<p><%= dungeon.description %></p>
+			<p># of floors: <%= dungeon.levels %></p>
+			<hr>
+			<h3>Comments</h3>
+			<hr>
+			<% dungeon.comments.forEach(function(comment){ %>
+				<p>
+					<strong><%= comment.author %></strong> - <%= comment.text %>
+				</p>
+		<%	}); %>
+			<div class="form-group">
+				<a href="/dungeons/<%= dungeon._id %>/comments/new" class="btn btn-success submit">Add a comment!</a>
+			</div>
+		</div>
+	</header>
+</div>
+
+<% include ../partials/footer %>
